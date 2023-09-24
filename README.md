@@ -35,19 +35,6 @@ $ docker run \
 ```
 Ref: https://sshuttle.readthedocs.io/
 
-### Forward all traffic:
-
-```bash
-$ docker run \
-    --name joestldr-sshuttle \
-    --detach \
-    --restart unless-stopped \
-    --volume /home/user/.ssh:/ssh \
-  joestldr/sshuttle:v1.0.0 \
-    -r username@hostname 0.0.0.0/0
-```
-Ref: https://sshuttle.readthedocs.io/
-
 # License
 
 Copyright 2023 [joes-tldr](https://github.com/joes-tldr)
