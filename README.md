@@ -10,30 +10,26 @@ GitHub: https://github.com/joestldr/dockerized-sshuttle
 
 ## TLDR; Sample usage: UDP proxy over TCP
 
-### Forward all traffic:
+### TLDR; ‘My VPN broke and need a temporary solution FAST to access local IPv4 addresses’:
 
 ```bash
 $ docker run \
     --name joestldr-sshuttle \
     --detach \
     --restart unless-stopped \
+    --cap-add NET_ADMIN \
     --volume /home/user/.ssh:/ssh \
-  joestldr/sshuttle:v1.0.0 \
-    -r username@hostname 0.0.0.0/0
-```
-
-### For ‘My VPN broke and need a temporary solution FAST to access local IPv4 addresses’:
-
-```bash
-$ docker run \
-    --name joestldr-sshuttle \
-    --detach \
-    --restart unless-stopped \
-    --volume /home/user/.ssh:/ssh \
-  joestldr/sshuttle:v1.0.0 \
+    --dns 9.9.9.9 --dns 149.112.112.112 \
+  joestldr/sshuttle:latest \
     --dns -NHr username@sshserver 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16
 ```
 Ref: https://sshuttle.readthedocs.io/
+
+## Limitations
+
+- `0/0` or `0.0.0.0/0` WILL NOT WORK (even if `privileged`) -- if you get this to work, file github issue!~
+- `--disable-ipv6` always set; did not install alpine dependencies for IPv6
+- well... discover on your own which else...
 
 # License
 

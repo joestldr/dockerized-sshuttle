@@ -1,7 +1,9 @@
 FROM alpine:latest
 
 RUN set -xv; \
-    apk add --update bash openssh-client sshpass netcat-openbsd python3 py3-pip && \
+    apk add --update \
+        bash openssh-client netcat-openbsd \
+        python3 py3-pip iptables && \
     rm -rf /var/cache/apk/*
 
 RUN set -xv; \
